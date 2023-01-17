@@ -2,11 +2,21 @@
 
 <div class="row" *ngFor="let post of posts">
   <div class="col">
-    <h2>Titulo del Post</h2>
-    <a href="">Ver autor</a>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde consectetur quas cum qui esse impedit in accusamus ex eius, maiores odio inventore, voluptatibus quae ea numquam alias libero modi aperiam.</p>
+    <h2>{{ post.title.charAt(0).toUpperCase() + post.title.slice(1) }}</h2>
+
+    <a [routerLink]="['/user', post.userId]">Ver autor</a>
+    <!-- <a routerLink="/user"></a>
+     -->
+    <!-- Comentarios del los posts -->
+
+    <p>{{ post.body }}</p>
     <button class="btn btn-secondary">Comentarios</button>
+    <hr>
   </div>
 </div>
 
 
+<!-- 
+    "angular"
+    "A" + "ngular" = "Angular" 
+-->
