@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularouter';
+
+  navbarOpts = [
+    { path: '/home', name: 'Home'},
+    { path: '/users', name: 'Users'},
+  ];
 }
+
+
