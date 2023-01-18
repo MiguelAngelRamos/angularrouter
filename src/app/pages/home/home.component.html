@@ -10,7 +10,15 @@
     <!-- Comentarios del los posts -->
 
     <p>{{ post.body }}</p>
-    <button class="btn btn-secondary">Comentarios</button>
+    <button class="btn btn-secondary" (click)="obtenerComentariosPorId(post.id)">Comentarios</button>
+    <ng-container *ngFor="let comentFilter of comentariosFiltradosPorPost">
+      <div class="mt-3 col-sm-10 offset-sm-1">
+        <label class="fw-bold">User: {{ comentFilter.email}}</label>
+        <br>
+        <label class="fw-bold">Respuesta: </label>
+        <p>{{ comentFilter.body }}</p>
+      </div>
+    </ng-container>
     <hr>
   </div>
 </div>

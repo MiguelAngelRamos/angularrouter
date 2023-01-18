@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services/data.service';
+import { IUser } from '../../interfaces/IUser';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -9,6 +11,8 @@ import { DataService } from '../../services/data.service';
 })
 export class UserComponent implements OnInit{
 
+  public errorMessage: string = '';
+  public user!: IUser;
   constructor(
     private dataService:DataService, 
     private activatedRoute: ActivatedRoute) {
@@ -24,7 +28,14 @@ export class UserComponent implements OnInit{
       console.log(params);
       let id = Number(params.get('id'));
       // let id = (params.get('id'));
-      this.dataService.getUserById(id).subscribe(user => console.log(user));
+      this.dataService.getUserById(id).pipe(
+        catchError((error) => {
+          // console.log(error);
+          const { message } = error;
+          this.errorMessage = message;
+          return throwError(() => new Error(message));
+        })
+      ).subscribe((user) => this.user = user );
    
     })
   }
